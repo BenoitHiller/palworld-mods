@@ -1,0 +1,102 @@
+#!/bin/bash
+
+set -ef
+
+declare MOD_NAME
+declare WORK_DIR
+declare OUT_DIR
+declare MOD_FOLDER
+declare INFO_FILE
+declare WORKSHOP_FILE
+declare WORKSHOP_ID
+declare WORKSHOP_OUT_DIR
+
+debug() {
+  printf "$@" >&2
+  printf "\n" >&2
+}
+
+error() {
+  debug "$@"
+  return 1
+}
+
+target_files() {
+  local -r info_file="$1"
+
+  jq -r '
+    .["InstallRule"][]["Targets"] | flatten | @tsv
+  ' "$info_file"
+
+  jq -r '.["Thumbnail"]' "$INFO_FILE"
+
+  echo "Info.json"
+  echo ".workshop.json"
+}
+
+package_workshop() {
+  local MOD_OUT_DIR="$OUT_DIR/workshop/$WORKSHOP_ID"
+  local thumbnail="$(jq -r '.["Thumbnail"]' "$INFO_FILE")"
+
+  mkdir -p "$MOD_OUT_DIR" || true
+  debug "Packaging %s into %s" "$MOD_NAME" "$MOD_OUT_DIR"
+
+  rsync -arvh --delete --files-from=<(target_files "$INFO_FILE") "$MOD_FOLDER/" "$MOD_OUT_DIR/"
+}
+
+install_workshop() {
+  if [[ -z "$DESTDIR" ]]; then
+    error "DESTDIR was not set, unable to perform install"
+  fi
+
+  debug "Installing mods to %s" "$DESTDIR"
+
+  for mod in "$@"; do
+    load_config "$mod"
+
+    if [[ -d "$WORKSHOP_OUT_DIR" ]]; then
+      rsync -avh --delete "$WORKSHOP_OUT_DIR" "$DESTDIR/$WORKSHOP_ID"
+    else
+      error "No workshop files found at %s, install skipped." "$WORKSHOP_OUT_DIR"
+    fi
+  done
+}
+
+initialize() {
+  WORK_DIR="${WORK_DIR-$PWD}"
+  OUT_DIR="${OUT_DIR-$WORK_DIR/out}"
+}
+
+load_config() {
+  MOD_NAME="$1"
+
+  MOD_FOLDER="$WORK_DIR/$MOD_NAME"
+  INFO_FILE="$MOD_FOLDER/Info.json"
+  WORKSHOP_FILE="$MOD_FOLDER/.workshop.json"
+
+  WORKSHOP_ID="$(jq -r '.["publishedfileid"]' "$WORKSHOP_FILE")"
+  WORKSHOP_OUT_DIR="$OUT_DIR/workshop/$WORKSHOP_ID"
+}
+
+main() {
+  local -r command_name="$1"
+
+  initialize
+
+  case "$command_name" in
+    package_workshop)
+      load_config "$2"
+      package_workshop
+      ;;
+    install_workshop)
+      shift
+      install_workshop "$@"
+      ;;
+    get_id)
+      load_config "$2"
+      echo "$WORKSHOP_ID"
+      ;;
+  esac
+}
+
+main "$@"

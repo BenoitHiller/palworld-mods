@@ -1,0 +1,27 @@
+{
+    "/Game/Pal/Blueprint/Weapon/BP_FishingRod_6.BP_FishingRod_6_C": {
+        "FishingRodParameter": {
+            "FishingMaxDistance": 3000.0
+        }
+    },
+    "/Game/Pal/Blueprint/Weapon/BP_FishingRod_5.BP_FishingRod_5_C": {
+        "FishingRodParameter": {
+            "FishingMaxDistance": 2700.0
+        }
+    },
+    "/Game/Pal/Blueprint/Weapon/BP_FishingRod_4.BP_FishingRod_4_C": {
+        "FishingRodParameter": {
+            "FishingMaxDistance": 2400.0
+        }
+    },
+    "/Game/Pal/Blueprint/Weapon/BP_FishingRod_3.BP_FishingRod_3_C": {
+        "FishingRodParameter": {
+            "FishingMaxDistance": 2100.0
+        }
+    },
+    "/Game/Pal/Blueprint/Weapon/BP_FishingRod_2.BP_FishingRod_2_C": {
+        "FishingRodParameter": {
+            "FishingMaxDistance": 1800.0
+        }
+    }
+}
