@@ -1,0 +1,5 @@
+{
+  "publishedfileid": "3641512642",
+  "changenote": "* Switch to using built in texture with transparency mask\r\n* Set a random higher chunk number\r\n\r\nHopefully these changes reduce the chance of issues with other mods. I can only assume that is the source of the small number of people for whom this mod hasn\u0027t worked (I don\u0027t even actually change the model at all so there are very few possibilities).",
+  "last_published_version": "1.1.0"
+}

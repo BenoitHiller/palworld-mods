@@ -1,8 +1,9 @@
 SHELL = /bin/sh
 STEAM_DIR ?= /mnt/c/Program Files (x86)/Steam
 WORKSHOP_CONTENT_DIR ?= $(STEAM_DIR)/steamapps/workshop/content/1623730
+MODS_WITH_BUILD = UltrakillWingRemover
 SIMPLE_MODS = LongRangeFishing
-MODS = $(SIMPLE_MODS)
+MODS = $(SIMPLE_MODS) $(MODS_WITH_BUILD)
 MOD_TOOL = $(CURDIR)/scripts/build_mod.bash
 OUT_DIR ?= $(CURDIR)/out
 
@@ -21,6 +22,10 @@ install:
 	$(MOD_TOOL) install_workshop $(MODS)
 
 $(SIMPLE_MODS):
+	$(MOD_TOOL) package_workshop $@
+
+$(MODS_WITH_BUILD):
+	$(MAKE) -C $@
 	$(MOD_TOOL) package_workshop $@
 
 clean:
