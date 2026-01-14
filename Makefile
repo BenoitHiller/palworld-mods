@@ -32,6 +32,10 @@ INTERMEDIARY_PAK_FILE = $(MOD_NAME)/Unreal/Windows/Pal/Content/Paks/pakchunk$(CH
 
 PAK_FILES = $(patsubst %,%/Paks/%_P.pak,$(COMPILED_MODS))
 
+ifndef SKIP_UNREAL
+BUILD_UNREAL = force
+endif
+
 export
 
 ###############
@@ -50,7 +54,7 @@ install:
 $(SIMPLE_MODS):
 	$(MOD_TOOL) package_workshop $@
 
-$(PAK_FILES): force
+$(PAK_FILES): $(BUILD_UNREAL)
 	$(UAT) $(UAT_ARGS)
 	-mkdir $(MOD_NAME)/Paks
 	cp $(INTERMEDIARY_PAK_FILE) $@
