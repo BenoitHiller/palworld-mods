@@ -1,0 +1,13 @@
+{
+    "BP_YakushimaBlade003_Blade_C": {
+        "DefaultBladeRightDistance": 0.5,
+        "DefaultBladeForwardDistance": 45.0,
+        "DefaultBladeUpDistance": 170.0,
+        "DefaultBladeAngle": 1.0,
+        "FloatingAmplitude": 2.0,
+        "Niagara": {
+            "RelativeScale3D": { "X": 0.2, "Y": 0.2, "Z": 0.2 },
+            "RelativeLocation": { "X": 55.0, "Y": 0.0, "Z": -9.0 }
+        }
+    }
+}

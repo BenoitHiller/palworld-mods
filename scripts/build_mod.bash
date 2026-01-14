@@ -55,7 +55,9 @@ install_workshop() {
     load_config "$mod"
 
     if [[ -d "$WORKSHOP_OUT_DIR" ]]; then
-      rsync -avh --delete "$WORKSHOP_OUT_DIR" "$DESTDIR/$WORKSHOP_ID"
+      set +f
+      rsync -avh --delete "$WORKSHOP_OUT_DIR/"* "$DESTDIR/$WORKSHOP_ID"
+      set -f
     else
       error "No workshop files found at %s, install skipped." "$WORKSHOP_OUT_DIR"
     fi
