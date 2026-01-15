@@ -41,7 +41,6 @@ target_files() {
   jq -r '.["Thumbnail"]' "$INFO_FILE"
 
   echo "Info.json"
-  echo ".workshop.json"
 }
 
 package_workshop() {
@@ -98,7 +97,7 @@ install_workshop() {
     load_config "$mod"
 
     if [[ -d "$WORKSHOP_OUT_DIR" ]]; then
-      rsync -avh --delete "$WORKSHOP_OUT_DIR" "$DESTDIR/"
+      rsync -avh --delete --exclude=".workshop.json" "$WORKSHOP_OUT_DIR" "$DESTDIR/"
     else
       error "No workshop files found at %s, install skipped." "$WORKSHOP_OUT_DIR"
     fi
