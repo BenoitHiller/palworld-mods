@@ -1,4 +1,8 @@
+# Smaller Terraprisma
+
 Makes the glowing blades spawned by the Terraprisma much smaller so they don't block your vision as much.
+
+![Screenshot of the smaller sized blades](./share/Screenshot1.png)
 
 ### Caveats
 
@@ -10,7 +14,7 @@ So I'm aware of the following quirks and hope to fix them in the future:
 
 For now it gets the job done but I think it could be prettier.
 
-# Installation
+## Installation
 
 The recommended method is to install the mod by subscribing on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3642921096).
 
@@ -22,10 +26,30 @@ After you subscribe to the mod, do these steps to enable the mod:
 4. Click the blue **Save** button and the game will now restart.
 5. Once the game starts up again, Smaller Terraprisma should now be enabled.
 
-## Manual Installation
+### Manual Installation
 
 If you want to install the mod outside of Steam or if you are using versions of UE4SS or PalSchema that don't come from the Steam Workshop you will need to install the mod manually.
 
 To do so first you will need to ensure you have set up UE4SS and PalSchema, see this guide for step by step instructions.
 
 Then download the latest version of the mod [on NexusMods](https://www.nexusmods.com/palworld/mods/3228) and extract the zip file into your Palworld game folder.
+
+## Building
+
+**See the top level [README](../README.md) for information about setting up the build in general.**
+
+This mod makes use of a Pak file so it will need to use Unreal Engine to compile the associated project found in the `./Unreal` folder.
+
+To build the mod use the following command in the root of the repository:
+
+```bash
+make SmallTerraprisma
+```
+
+This will generate both a folder `./out/workshop/3642921096` which contains the steam workshop result as well an archive `./out/nexus/SmallTerraprisma-VERSION.zip`.
+
+You can use the following command to install the generated files into your local Steam Workshop folder so that the game will find them:
+
+```bash
+make install MODS=SmallTerraprisma
+```
