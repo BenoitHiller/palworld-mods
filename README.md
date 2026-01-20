@@ -71,3 +71,7 @@ You are also able to specify which mods should be installed by setting the `MODS
 # Install just SmallTerraprisma and UltrakillWingRemover
 make install MODS="SmallTerraprisma UltrakillWingRemover"
 ```
+
+## License
+
+Everything that I've written for this project is provided to you licensed under using CC-BY-4.0 (see [LICENSE](./LICENSE) for the full text). This project contains mods for Palworld so makes indirect use of Pocketpair IP as well as direct use of a small number of game assets in accordance with their [Guidelines for Derivative Works](https://www.pocketpair.jp/guidelines-derivativework).
