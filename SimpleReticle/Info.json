@@ -1,0 +1,20 @@
+{
+  "ModName": "Simple Reticle",
+  "PackageName": "SimpleReticle",
+  "Thumbnail": "thumbnail.png",
+  "Version": "1.0.0",
+  "MinRevision": 82182,
+  "Author": "Stephenr",
+  "Dependencies": null,
+  "Tags": [
+    "User Interface"
+  ],
+  "InstallRule": [
+    {
+      "Type": "Paks",
+      "Targets": [
+        "./Paks/"
+      ]
+    }
+  ]
+}

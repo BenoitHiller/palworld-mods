@@ -7,6 +7,7 @@ See the linked subfolders for more details about each mod.
 * [UltrakillWingRemover](./UltrakillWingRemover) Removes the wings from the ULTRAKILL collaboration models to make it easier to see.
 * [LongRangeFishing](./LongRangeFishing) Extends the range at which you can fish.
 * [SmallTerraprisma](./SmallTerraprisma) Shrinks the blades spawned by the Terraprisma sword so that they don't block your view.
+* [SimpleReticle](./SimpleReticle) Replaces the sci-fi style default reticle with a simple cross.
 
 As I built up a collection of them copying things around got to be very frustrating copying files around so I centralized them and set up some tooling to work around the somewhat convoluted progress of developing these mods.
 

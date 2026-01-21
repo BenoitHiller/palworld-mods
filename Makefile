@@ -2,7 +2,7 @@ SHELL = /bin/sh
 STEAM_DIR ?= /mnt/c/Program Files (x86)/Steam
 WORKSHOP_CONTENT_DIR ?= $(STEAM_DIR)/steamapps/workshop/content/1623730
 SIMPLE_MODS = LongRangeFishing
-COMPILED_MODS = UltrakillWingRemover SmallTerraprisma
+COMPILED_MODS = UltrakillWingRemover SmallTerraprisma SimpleReticle
 MODS ?= $(SIMPLE_MODS) $(COMPILED_MODS)
 MOD_TOOL = $(CURDIR)/scripts/mod_tool.bash
 OUT_DIR ?= $(CURDIR)/out
@@ -67,6 +67,10 @@ UltrakillWingRemover: UltrakillWingRemover/Paks/UltrakillWingRemover_P.pak
 SmallTerraprisma: MOD_NAME=SmallTerraprisma
 SmallTerraprisma: CHUNK_ID=1096
 SmallTerraprisma: SmallTerraprisma/Paks/SmallTerraprisma_P.pak
+
+SimpleReticle: MOD_NAME=SimpleReticle
+SimpleReticle: CHUNK_ID=8578
+SimpleReticle: SimpleReticle/Paks/SimpleReticle_P.pak
 
 clean:
 	-rm -r $(OUT_DIR)
