@@ -2,12 +2,15 @@
   "ModName": "Fast Travel Hotkeys",
   "PackageName": "FastTravelHotkeys",
   "Thumbnail": "thumbnail.png",
-  "Version": "1.0.0",
+  "Version": "1.0.1",
   "MinRevision": 82182,
   "Author": "Stephenr",
-  "Dependencies": null,
+  "Dependencies": [
+    "UE4SSExperimentalPW"
+  ],
   "Tags": [
-    "UE4SS"
+    "UE4SS",
+    "User Interface"
   ],
   "InstallRule": [
     {
