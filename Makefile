@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 STEAM_DIR ?= /mnt/c/Program Files (x86)/Steam
 WORKSHOP_CONTENT_DIR ?= $(STEAM_DIR)/steamapps/workshop/content/1623730
-SIMPLE_MODS = LongRangeFishing
+SIMPLE_MODS = LongRangeFishing FastTravelHotkeys
 COMPILED_MODS = UltrakillWingRemover SmallTerraprisma SimpleReticle
 MODS ?= $(SIMPLE_MODS) $(COMPILED_MODS)
 MOD_TOOL = $(CURDIR)/scripts/mod_tool.bash

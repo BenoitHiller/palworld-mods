@@ -10,7 +10,8 @@ declare INFO_FILE
 declare WORKSHOP_FILE
 declare WORKSHOP_ID
 declare WORKSHOP_OUT_DIR
-declare PALSCHEMA_PREFIX=Pal/Binaries/Win64/ue4ss/Mods/PalSchema/mods
+declare UE4SS_PREFIX=Pal/Binaries/Win64/ue4ss/Mods
+declare PALSCHEMA_PREFIX="$UE4SS_PREFIX/PalSchema/mods"
 declare PAKS_PREFIX="Pal/Content/Paks/~mods"
 
 debug() {
@@ -68,11 +69,19 @@ package_nexus() {
   local MOD_BUILD_DIR="$BUILD_DIR/nexus/$MOD_NAME"
   local MOD_STEAM_FOLDER="$OUT_DIR/workshop/$WORKSHOP_ID"
   local PALSCHEMA_BUILD_DIR="$MOD_BUILD_DIR/$PALSCHEMA_PREFIX/$MOD_NAME"
+  local UE4SS_BUILD_DIR="$MOD_BUILD_DIR/$UE4SS_PREFIX/$MOD_NAME/Scripts"
   local PAKS_BUILD_DIR="$MOD_BUILD_DIR/$PAKS_PREFIX"
   local version="$(jq -r '.["Version"]' "$INFO_FILE")"
 
   mkdir -p "$MOD_BUILD_DIR" || true
   debug "Packaging %s into %s" "$MOD_NAME" "$MOD_OUT_DIR"
+
+  if [[ -d "$MOD_STEAM_FOLDER/Scripts" ]]; then
+    ensure_dir "$UE4SS_BUILD_DIR"
+    rsync -arvh --delete "$MOD_STEAM_FOLDER/Scripts" "$UE4SS_BUILD_DIR"
+  else
+    clean_dir "$PALSCHEMA_BUILD_DIR"
+  fi
 
   if [[ -d "$MOD_STEAM_FOLDER/PalSchema" ]]; then
     ensure_dir "$PALSCHEMA_BUILD_DIR"
