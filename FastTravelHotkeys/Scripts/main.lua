@@ -25,8 +25,8 @@ local function GetBaseLocations()
     for _, locationRef in pairs(locationMap) do
         ---@type UPalLocationBase
         local location = locationRef:get()
-        local type = location:GetType()
-        if type == 4 then
+        local locationType = location:GetType()
+        if locationType == 4 and location:IsShowInMap() then
             local point = location:LocationPoint()
             if point:IsEnableFastTravel() then
                 bases[#bases + 1] = point
@@ -42,7 +42,10 @@ local function GoToBase(index)
     local base = bases[index]
     if base ~= nil and base:IsValid() then
         base:InvokeFastTravel()
+        return true
     end
+
+    return false
 end
 
 local function BaseCallbackForIndex(index)
@@ -55,8 +58,9 @@ local function BaseCallbackForIndex(index)
         local mapUI = FindFirstOf("WBP_Map_Base_C")
         if mapUI ~= nil and mapUI:IsValid()
             and mapUI.bIsActive and mapUI["Can Fast Travel"] then
-            mapUI:CloseMap()
-            GoToBase(index)
+            if GoToBase(index) then
+              mapUI:CloseMap()
+            end
         end
     end
 end
