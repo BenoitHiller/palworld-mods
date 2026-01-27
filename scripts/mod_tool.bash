@@ -78,7 +78,8 @@ package_nexus() {
 
   if [[ -d "$MOD_STEAM_FOLDER/Scripts" ]]; then
     ensure_dir "$UE4SS_BUILD_DIR"
-    rsync -arvh --delete "$MOD_STEAM_FOLDER/Scripts" "$UE4SS_BUILD_DIR"
+    rsync -arvh --delete "$MOD_STEAM_FOLDER/Scripts" "$UE4SS_BUILD_DIR/"
+    touch "$UE4SS_BUILD_DIR/enabled.txt"
   else
     clean_dir "$PALSCHEMA_BUILD_DIR"
   fi
