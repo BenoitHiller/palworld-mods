@@ -2,6 +2,15 @@ local UEHelpers = require("UEHelpers")
 ---@type UPalLocationManager
 local LocationManager = CreateInvalidObject()
 local keybindsRegistered = false
+---@type UPalUtility
+local PalUtility = CreateInvalidObject()
+local worldContext = CreateInvalidObject()
+
+--[[
+local function formatCoord(coord)
+    return string.format("(%f, %f, %f)", coord.X, coord.Y, coord.Z)
+end
+]]
 
 ---@param left UPalLocationPoint
 ---@param right UPalLocationPoint
@@ -19,6 +28,8 @@ end
 
 ---@return UPalLocationPoint[]
 local function GetBaseLocations()
+    local playerUid = PalUtility:GetLocalPlayerUID(worldContext)
+
     local locationMap = LocationManager:GetLocationMap()
     local bases = {}
 
@@ -27,9 +38,12 @@ local function GetBaseLocations()
         local location = locationRef:get()
         local locationType = location:GetType()
         if locationType == 4 and location:IsShowInMap() then
-            local point = location:LocationPoint()
-            if point:IsEnableFastTravel() then
-                bases[#bases + 1] = point
+            --- @cast location UPalLocationPointBaseCamp
+            if location:IsSameGuildWithPlayer(playerUid) then
+                local point = location:LocationPoint()
+                if point:IsEnableFastTravel() then
+                    bases[#bases + 1] = point
+                end
             end
         end
     end
@@ -68,8 +82,8 @@ end
 ---@param PlayerController APlayerController
 local function HandleModLogic(PlayerController)
     ---@type UPalUtility
-    local PalUtility = StaticFindObject("/Script/Pal.Default__PalUtility")
-    local worldContext = UEHelpers:GetWorldContextObject()
+    PalUtility = StaticFindObject("/Script/Pal.Default__PalUtility")
+    worldContext = UEHelpers:GetWorldContextObject()
 
     LocationManager = PalUtility:GetLocationManager(worldContext)
 
