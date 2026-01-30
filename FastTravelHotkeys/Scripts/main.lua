@@ -51,17 +51,6 @@ local function GetBaseLocations()
     return bases
 end
 
-local function GoToBase(index)
-    local bases = GetBaseLocations()
-    local base = bases[index]
-    if base ~= nil and base:IsValid() then
-        base:InvokeFastTravel()
-        return true
-    end
-
-    return false
-end
-
 local function BaseCallbackForIndex(index)
     return function()
         if not LocationManager:IsValid() then
@@ -72,8 +61,13 @@ local function BaseCallbackForIndex(index)
         local mapUI = FindFirstOf("WBP_Map_Base_C")
         if mapUI ~= nil and mapUI:IsValid()
             and mapUI.bIsActive and mapUI["Can Fast Travel"] then
-            if GoToBase(index) then
-              mapUI:CloseMap()
+            local bases = GetBaseLocations()
+            local base = bases[index]
+            if base ~= nil and base:IsValid() then
+                ExecuteInGameThread(function()
+                    base:InvokeFastTravel()
+                    mapUI:CloseMap()
+                end)
             end
         end
     end
