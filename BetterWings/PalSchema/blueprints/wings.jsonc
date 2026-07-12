@@ -1,0 +1,16 @@
+{
+    "/Game/Pal/Blueprint/Equipment/Glider/BP_WingGlider.BP_WingGlider_C": {
+      "JetpackFuelConsumptionPerSecond": 2.5,
+      "JetpackBoostFuelConsumptionPerSecond": 5.0,
+      "JetpackInitialSpeed": 2200.0,
+      "JetpackGravityAcceleration": 2900.0,
+      "JetpackMaxSpeedAscend": 3700.0,
+      "JetpackMaxSpeedDescend": 6000.0,
+      "JetpackPitchUpDeceleration": 1100.0,
+      "JetpackMaxAutoPitchDownAngle": 78.0,
+      "JetpackStallPitchAngle": -10.0,
+      "JetpackBoostAcceleration": 14000.0,
+      "JetpackBoostMaxSpeedAscend": 4800.0,
+      "JetpackBoostMaxSpeedDescend": 6000.0
+    }
+}
